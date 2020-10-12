@@ -1,0 +1,11 @@
+from numpy import sqrt,tan,cos
+import Const as co
+
+g=co.g
+h=100
+pi=co.pi
+a=co.pi /3
+b=30
+
+v=sqrt((g*h*(tan(b))**2)/(2*(1-tan(b)*tan(a))*(cos(a))**2))
+print(v)
