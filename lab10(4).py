@@ -3,32 +3,32 @@ from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 
 # Определяем переменную величину
-t = np.arange(-1, 1, 0.01)
+x = np.arange(-5, 5, 0.01)
 
 # Определяем функцию для системы диф. уравнений
-def diff_func(tmp, t): # z - изменяемая величина для системы
-    x, y = tmp # Указание изменяемых функций, через z
+def diff_func(tmp, x): # z - изменяемая величина для системы
+    y, w = tmp # Указание изменяемых функций, через z
 	
     # Первое уравнение системы
-    dx_dt = 3 * x - 2 * y + np.exp(3 * t) / (np.exp(t) + 1)
+    dy_dt = w
     # Второе уравнение системы
-    dy_dt = x - np.exp(3 * t) / (np.exp(t) + 1) 
+    dw_dt = -4 * w - 5 * y
     
-    return dx_dt, dy_dt
+    return dy_dt, dw_dt
 
 # Определяем начальные значения и параметры,
 # входящие в систему диф. уравнений
-y0 = -7
-x0 = 5
+y0 = 4
+dy0_dt = -1
 
 # Начальное значение изменяемой величины системы
-tmp0 = x0, y0
+tmp0 = y0, dy0_dt
 
 # Решаем систему диф. уравнений
-sol = odeint(diff_func, tmp0, t)
+sol = odeint(diff_func, tmp0, x)
 
 # Строим решение в виде графика
-plt.plot(t, sol[:, 1], 'b')
-
+plt.plot(x, sol[:, 1], 'b')
+plt.plot(sol[:, 1], sol[:, 0], 'g')
+plt.plot(sol[:, 0], sol[:, 1], 'r')
 plt.show()
-© 2021 GitHub, Inc.
